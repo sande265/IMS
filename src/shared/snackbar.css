@@ -1,0 +1,170 @@
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+.snackbar {
+  border-radius: 9px;
+  color: rgb(83, 81, 81);
+  box-shadow: 6px 4px 13px 0px rgb(0 0 0 / 9%);
+  transition: appear 1s ease-in;
+  /*width: 320px;*/
+  padding: 10px 15px 10px 15px;
+  top: 85px;
+  right: 20px;
+  background: #fff;
+  animation-name: appear;
+  animation-duration: 0.5s;
+  position: fixed;
+  display: flex;
+  justify-content: end;
+  z-index: 1300;
+  padding: 0px;
+  /* background: red; */
+}
+.snackbar .message {
+  flex-grow: 1;
+  padding: 10px;
+}
+.snackbar .innerWrapper {
+  background: white;
+  padding: 0px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+.snackbar i {
+  /*font-size: 22px;*/
+  /*position: relative;*/
+  /*top: 4px;*/
+}
+.snackbar .icon {
+  font-family: "Material Icons", serif;
+  font-style: normal;
+  font-size: x-large;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "liga";
+  border: none;
+  padding: 2px;
+  background: none;
+}
+.snackbar.success {
+  border: 1px solid rgb(76 175 80);
+}
+.snackbar.success .closeIcon {
+  /*border: 1px solid #dadada;*/
+  /*border-left: 5px solid rgb(113, 224, 85);*/
+  background: rgb(76 175 80);
+}
+.snackbar.warning .closeIcon {
+  /*border: 1px solid #dadada;*/
+  /*border-left: 5px solid rgb(255, 87, 34);*/
+  background: rgb(224 138 12);
+}
+
+.snackbar.error .closeIcon {
+  /*border: 1px solid #dadada;*/
+  /*border-left: 5px solid rgb(233 30 30);*/
+  background: rgb(216 58 8);
+}
+.snackbar.info {
+  border: 1px solid #dadada;
+  border-left: 5px solid rgb(233 30 30);
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  90% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.snackbar1 {
+  border-radius: 2px;
+  color: rgb(83, 81, 81);
+  box-shadow: 0 0px 6px 1px rgba(0, 0, 0, 0.3),
+    0 0px 15px 1px rgba(0, 0, 0, 0.3);
+  transition: appear 1s ease-in;
+  width: 320px;
+  padding: 10px 15px 10px 15px;
+  top: 100px;
+  right: 16px;
+  background: #eee;
+  animation-name: appear1;
+  animation-duration: 0.5s;
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  z-index: 1300;
+}
+.snackbar1 .message {
+  flex-grow: 1;
+}
+.snackbar1 .icon {
+  font-family: "Material Icons", serif;
+  font-style: normal;
+  font-size: x-large;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "liga";
+  border: none;
+  padding: 2px;
+  background: none;
+}
+
+.snackbar1.success {
+  border-left: 5px solid rgb(113, 224, 85);
+}
+.snackbar1.warning {
+  border-left: 5px solid rgba(249, 252, 71, 0.933);
+}
+
+.snackbar1.error {
+  border-left: 5px solid rgba(235, 46, 46, 0.933);
+}
+.snackbar1.info {
+  border-left: 5px solid rgba(197, 192, 192, 0.933);
+}
+
+@keyframes appear1 {
+  0% {
+    bottom: 30px;
+    right: 16px;
+  }
+  to {
+    bottom: 100px;
+    right: 16px;
+  }
+}
+.snackbarClose {
+  poition: absolute;
+}
+.closeIcon {
+  /*background:#ff5858;*/
+  padding: 10px;
+  color: white;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+.innerWrapper {
+  border-radius: 8px;
+}
