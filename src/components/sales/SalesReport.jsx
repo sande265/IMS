@@ -14,7 +14,7 @@ const columns = [
     { name: "sale_price", alignment: 'right' },
     { name: "total sales", alignment: 'right' },
     { name: "sold_date", alignment: 'right' },
-    { name: "profit", alignment: 'right' },
+    { name: "profit/loss", alignment: 'right' },
     { name: "actions", alignment: 'center' }
 ]
 
@@ -36,7 +36,6 @@ const SalesReport = (props) => {
     let date = new Date()
     let prev_mth = new Date(date.getTime() - (30 * 24 * 60 * 60 * 1000)).toISOString().split("T")[0]
     let today = date.toISOString().split("T")[0];
-    console.log("prev", prev_mth);
 
     const [extra, setExtra] = useState({
         filter: [
@@ -62,10 +61,6 @@ const SalesReport = (props) => {
         filterValue: null,
         showFilterOptions: false,
     })
-
-    // useEffect(() => {
-    //     fetchData()
-    // }, [])
 
     useEffect(() => {
         if (report)
@@ -197,8 +192,6 @@ const SalesReport = (props) => {
     let { data, current_page, from, last_page, to } = state.data;
     let { limit, filter } = extra;
 
-    console.log("state", state);
-
     let SalesReport = loading ? <tr className="text-center">
         <td colSpan="10"><SpinnerLoader /></td>
     </tr> : data && data.length > 0 ? data.map((items, idx) => {
@@ -220,6 +213,12 @@ const SalesReport = (props) => {
         <td colSpan="10">No Records</td>
     </tr>
 
+    let total = 0
+    for (var i = 0; i < data?.length; i++) {
+        if (data[i] && data[i].sale_price && data[i].qty && data[i].actual_price)
+            total += (data[i].sale_price * data[i].qty) - (data[i].actual_price * data[i].qty)
+    }
+
     return <ContentWrapper>
         <div className="card">
             <div className="card-header">
@@ -238,6 +237,17 @@ const SalesReport = (props) => {
                 <div className="table-wrapper">
                     <Table tableClass="table-hover" columns={columns}>
                         {SalesReport}
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td className="text-right">Total: Rs. {total}</td>
+                            <td></td>
+                        </tr>
                     </Table>
                 </div>
                 <Pagination

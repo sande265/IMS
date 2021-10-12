@@ -1,6 +1,6 @@
 
 const BasicInput = (props) => {
-    let { name, onChange, label, value, error, type } = props;
+    let { name, onChange, label, value, error, type, disabled, placeholder } = props;
 
     return (
         <div className={`form-group`}>
@@ -12,6 +12,8 @@ const BasicInput = (props) => {
                 type={type ? type : 'text'}
                 onChange={onChange}
                 id={name}
+                disabled={disabled}
+                placeholder={placeholder}
             />
             {error && <small className="text-danger">{error}</small>}
         </div>

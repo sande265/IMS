@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from "react-router";
 import { NavLink } from 'react-router-dom';
+import { handleLogout } from '../helpers/GeneralHelpers';
 
 const links = [
     {
@@ -9,6 +10,12 @@ const links = [
         label: "Home",
         newWindow: false,
     },
+    {
+        type: "link",
+        path: "/new-sale",
+        label: "New Sale",
+        newWindow: false,
+    }
 ]
 
 const Header = (props) => {
@@ -18,18 +25,11 @@ const Header = (props) => {
     if (pathname === "/") {
         title = "Dashboard";
     } else {
-        let _title = pathname.split('/');
-        title = _title
+        title = pathname.split('/');
     }
-    const handleLogout = (props) => {
-        localStorage.clear();
-        sessionStorage.clear();
-        history.push({
-            pathname: "/"
-        })
-        window.location.reload(true)
 
-    }
+    const [display, setDisplay] = useState('none')
+
 
     const LinkItem = React.memo((props) => {
         const { link } = props
@@ -39,6 +39,23 @@ const Header = (props) => {
             </NavLink>
         </li>
     })
+
+    const useOutsideAlerter = (ref) => {
+        useEffect(() => {
+            function handleClickOutside(event) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    setDisplay('none')
+                }
+            }
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [ref]);
+    }
+
+    const wrapperRef = useRef(null);
+    useOutsideAlerter(wrapperRef);
 
     return (
         <header id="header" className={" d-flex align-items-center justify-content-between px-4 bg-primary"}>
@@ -53,10 +70,21 @@ const Header = (props) => {
                 })}
             </ul>
 
-            <div>
-                <div className="btn-group">
-                    <span className="header-item" href onClick={() => history.push('/profile')}><i className="ri-user-3-line fs-6"></i></span>
-                    {/* <a className="header-item pe-1" href onClick={handleLogout}><i className="ri-logout-box-r-line fs-6"></i></a> */}
+            <div className="dropdown" ref={wrapperRef}>
+                <a className="header-item" href onClick={() => display === 'block' ? setDisplay('none') : setDisplay('block')}>
+                    <i className="ri-user-3-line fs-6"></i>
+                </a>
+                <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right" style={{ display: display }}>
+                    <a href className="dropdown-item d-flex" onClick={() => history.push('/profile')}>
+                        <i className="ri-user-line"></i>
+                        <span className="ml-auto">Profile</span>
+                    </a>
+                    <a href className="dropdown-item d-flex" onClick={() => handleLogout()}>
+                        <i className="ri-logout-box-line"></i>
+                        <span className="ml-auto">
+                            Logout
+                        </span>
+                    </a>
                 </div>
             </div>
         </header>

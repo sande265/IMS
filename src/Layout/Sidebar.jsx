@@ -21,6 +21,15 @@ class Sidebar extends React.Component {
 
     componentDidMount() {
 
+        if (window.innerWidth < 768) {
+            document.getElementById('sidebarMenu') && document.getElementById('sidebarMenu').classList.add('toggled');
+            document.getElementById('main') && document.getElementById('main').classList.add('toggled');
+            document.getElementById('header') && document.getElementById('header').classList.add('toggled');
+            this.setState(({
+                addClassName: false
+            }))
+        }
+
         document.getElementById('toggleSidebar').onclick = function (e) {
             document.getElementById('sidebarMenu') && document.getElementById('sidebarMenu').classList.toggle('toggled');
             document.getElementById('main') && document.getElementById('main').classList.toggle('toggled');
@@ -71,7 +80,7 @@ class Sidebar extends React.Component {
 
     render() {
         // console.log('addClassName', this.state.addClassName)
-        const { selectedItem, profile } = this.state
+        const { selectedItem } = this.state
 
 
         return (

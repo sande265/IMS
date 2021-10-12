@@ -5,8 +5,8 @@ import PublicRoute from "../Layout/PublicRoute"
 import Login from "../Pages/auth/Login"
 import { Route, Switch, useHistory } from "react-router"
 import {
-    Inventory, NewEditInventory, User, Customers, NewEditCustomers, Vendors, NewEditVendors, Dashboard, SalesReport,
-    Categories, NewEditCategory, NewSales
+    Inventory, NewEditInventory, Customers, NewEditCustomers, Vendors, NewEditVendors, Dashboard, SalesReport,
+    Categories, NewEditCategory, NewSales, Profile
 } from "../components"
 import DefaultLayout from "../Layout/DefaultLayout"
 import NotFound from '../Pages/views/NotFound';
@@ -23,14 +23,14 @@ const Routes = (props) => {
         </Route>
 
         <Route path={[
-            "/dashboard", "/user", "/inventories", "/inventory/new", "/inventory/:id", "/customers", '/customer/new', '/customers/:id',
+            "/dashboard", "/profile", "/inventories", "/inventory/new", "/inventory/:id", "/customers", '/customer/new', '/customers/:id',
             "/vendors", "/vendors/:id/edit", "/sales-report", '/categories', '/category/new', '/category/:id/edit', "/new-sale"
         ]}>
             <DefaultLayout>
                 <PrivateRoute type="private" component={() => {
                     return <>
                         <Route exact path="/dashboard" component={Dashboard} />
-                        <Route exact path="/user/:id" component={User} />
+                        <Route exact path="/profile" component={Profile} />
                         <Route exact path="/inventories" component={Inventory} />
                         <Route exact path="/inventory/new" component={NewEditInventory} />
                         <Route exact path="/inventory/:id/edit" component={NewEditInventory} />

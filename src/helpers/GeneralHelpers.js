@@ -114,3 +114,9 @@ export const getUrlParameter = (query) => {
     var search = query.substring(1);
     return search ? JSON.parse('{"' + search.replace(/&/g, '","').replace(/=/g, '":"') + '"}', function (key, value) { return key === "" ? value : decodeURIComponent(value) }) : {}
 };
+
+export const handleLogout = () => {
+    localStorage.clear();
+    sessionStorage.clear();
+    window.location = '/'
+}

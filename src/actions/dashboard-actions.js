@@ -30,7 +30,6 @@ export const getSalesReport = (attribute) => {
             sort_by: attribute.sort_by || 'desc'
         }
         attribute.filter && attribute.filter.map(item => {
-            console.log("item", item);
             if (item.value) {
                 params[`[${item.key}]`] = item.value
             }

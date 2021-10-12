@@ -61,6 +61,48 @@ svg {
   color: #18202b;
 }
 
+.dropdown .dropdown-menu,
+.dropup:not(.bootstrap-select) .dropdown-menu,
+.bootstrap-select .dropdown-menu:not(.inner),
+.dropdown-menu.bootstrap-datetimepicker-widget.bottom {
+  transform: translate3d(4px, -8px, 0) !important;
+  opacity: 1;
+  top: 100% !important;
+  visibility: visible;
+}
+
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus,
+.bootstrap-select .dropdown-menu.inner li a:hover,
+.bootstrap-select .dropdown-menu.inner li a:focus {
+  background-color: #999;
+}
+
+@media screen and (min-width: 992px) {
+  .dropdown-menu .dropdown-item {
+    color: #000;
+  }
+}
+
+@media (min-width: 480px) {
+  .profileCard {
+    width: 50%;
+  }
+}
+
+.list-group-item {
+  padding: 0.5rem;
+  color: #555;
+  &:hover {
+    background-color: #171941;
+    color: #fff;
+  }
+  &:active {
+    background-color: #2dce89;
+    color: #fff;
+  }
+}
+
 .header-item.active {
   color: #1f2937;
 }
@@ -420,6 +462,9 @@ main.toggled {
   top: 10px;
   left: 10px;
   cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #fff;
+  border-radius: 15px;
 }
 
 .pointer {
@@ -433,6 +478,124 @@ main.toggled {
   background-size: 210% 100%;
   color: #fff;
 }
+
+.editBtn {
+  padding: 8px;
+  border: 1px solid #fff;
+  border-radius: 14px;
+}
+
+.editBtn:hover {
+  background-color: #00f2c3;
+  opacity: 0.8;
+}
+
+// Select Box Styles
+.select-search-box {
+  position: relative;
+  margin-bottom: 0px;
+  // background: #fff;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.select-search-box__select--display {
+  display: block !important;
+}
+
+.select-search-box__select.select-search-box__select--display {
+  display: block;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-radius: 4px;
+  overflow: auto;
+  box-shadow: 0 7px 14px 0 rgba(50, 50, 93, 0.1),
+    0 3px 6px 0 rgba(0, 0, 0, 0.07);
+  z-index: 100;
+  min-height: 49px;
+}
+
+.select-search-box__select {
+  display: none;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-radius: 4px;
+  overflow: auto;
+  box-shadow: 0 7px 14px 0 rgba(50, 50, 93, 0.1),
+    0 3px 6px 0 rgba(0, 0, 0, 0.07);
+  z-index: 100;
+  min-height: 49px;
+}
+
+.select-search-box__options {
+  padding-left: 0px;
+}
+
+.overlay-loader-container {
+  display: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 100%;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.select-search-box__option:first-child {
+  border-top: none;
+}
+
+.select-search-box__option {
+  font-size: 13px;
+  padding: 10px 15px;
+}
+
+.select-search-box__option {
+  font-size: 16px;
+  font-weight: 400;
+  color: #616b74;
+  padding: 10px 20px;
+  border-top: 1px solid #eee;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.overlay-loader-container.overlay-loader-container-show {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 100%;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.select-search-box__option.select-search-box__row.select-search-box__option--selected {
+  background-color: #00f2c3;
+}
+
+/* End Custom Select Search Styles*/
 
 @media (max-width: 992px) {
   .content .content-wrapper {

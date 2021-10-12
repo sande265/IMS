@@ -31,8 +31,6 @@ const Dashboard = (props) => {
 
     const { data, total_amount, total_qty } = state;
 
-    console.log("state", state);
-
     return <ContentWrapper>
         <div className="row">
             <div className="col-xs-12 col-sm-6 col-md-4">
@@ -46,7 +44,7 @@ const Dashboard = (props) => {
             </div>
             <div className="col-xs-12 col-sm-6 col-md-3">
                 <div className="card card-success">
-                    <div className="card-header with-border">Total Sale Quantity</div>
+                    <div className="card-header with-border">Total Quantity Sold</div>
                     <div className="card-body">
                         <div className="text-center" style={{ fontSize: "30px", fontWeight: 900 }}>{total_qty ? total_qty : 0}</div>
                     </div>

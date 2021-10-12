@@ -1,5 +1,4 @@
 import Home from './Home/Home';
-import User from './Users/User';
 import Inventory from './inventory/Inventory';
 import NewEditInventory from './inventory/NewEditInventory';
 import Customers from './customers/Customers';
@@ -11,9 +10,9 @@ import SalesReport from './sales/SalesReport';
 import Categories from './category/Categories';
 import NewEditCategory from './category/NewEditCategory';
 import NewSales from './sales/NewSales';
+import Profile from './Users/Profile';
 
 export {
-    User,
     Home,
     Inventory,
     NewEditInventory,
@@ -25,5 +24,6 @@ export {
     SalesReport,
     Categories,
     NewEditCategory,
-    NewSales
+    NewSales,
+    Profile,
 }

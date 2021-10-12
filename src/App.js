@@ -5,7 +5,7 @@ import "./assets/css/nucleo-icons.css";
 import "./assets/scss/style.scss";
 import "./assets/demo/demo.css";
 // import './styles/adminlte.css'
-import './styles/custom.css'
+import './styles/custom.scss'
 
 const App = () => {
     return <Router history={history}>

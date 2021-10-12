@@ -1,13 +1,12 @@
 import { combineReducers } from "redux";
 import {
-    alertReducer, userReducer, inventoryReducers, authReducer, customerReducers, vendorReducers, dashboardReducers,
+    alertReducer, inventoryReducers, authReducer, customerReducers, vendorReducers, dashboardReducers,
     categoryReducer
 } from "./Reducers";
 
 const reducers = combineReducers({
     alerts: alertReducer,
     currentUser: authReducer,
-    user: userReducer,
     inventory: inventoryReducers,
     customers: customerReducers,
     vendors: vendorReducers,
@@ -16,8 +15,6 @@ const reducers = combineReducers({
 })
 
 const rootReducer = (state, action) => {
-    console.log("state", state);
-    console.log("actions", action);
     return reducers(state, action)
 }
 

@@ -14,9 +14,10 @@ const getAll = (attribute) => {
             sort_field: attribute.sort_field || `id`,
             sort_by: attribute.sort_by || 'desc'
         }
-        attribute.filter && Object.keys(attribute.filter).forEach(i => {
-            let item = attribute.filter[i]
-            params[`filter[${i}]`] = item
+        attribute.filter && attribute.filter.map(item => {
+            if (item.value) {
+                params[`filter[${item.key}]`] = item.value
+            }
         })
         let config = {
             params
