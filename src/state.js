@@ -16,6 +16,8 @@ const reducers = combineReducers({
 })
 
 const rootReducer = (state, action) => {
+    console.log("state", state);
+    console.log("actions", action);
     return reducers(state, action)
 }
 

@@ -5,7 +5,7 @@ const getAll = (attribute) => {
     attribute = attribute || {}
     let url = '/customers'
     return dispatch => {
-        dispatch(processing(customerConstants.FETCH_ALL_PROCESSING, true));
+        dispatch(processing(customerConstants.FETCH_ALL_PROCESSING));
         let params = {
             limit: attribute.limit || 10,
             page: attribute.page || 1,
@@ -23,6 +23,7 @@ const getAll = (attribute) => {
         return api.get(url, config)
             .then(
                 response => {
+                    console.log("res", response);
                     dispatch(success(customerConstants.FETCH_ALL_SUCCESS, response))
                     return response
                 },
