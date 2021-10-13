@@ -1,5 +1,6 @@
 import { customerConstants } from '../Constants'
 import { api, processing, success, failure } from '../shared/axios'
+import { errorAlert } from './alert-actions'
 
 const getAll = (attribute) => {
     attribute = attribute || {}
@@ -23,13 +24,12 @@ const getAll = (attribute) => {
         return api.get(url, config)
             .then(
                 response => {
-                    console.log("res", response);
                     dispatch(success(customerConstants.FETCH_ALL_SUCCESS, response))
                     return response
                 },
                 error => {
-                    console.log("error", error);
                     dispatch(failure(customerConstants.FETCH_ALL_ERROR, error))
+                    if (error?.data?.message) dispatch(errorAlert(error.data.message))
                     return error
                 }
             )

@@ -1,6 +1,6 @@
 import { inventoryConstant } from '../Constants/inventory-constants'
 import { api, processing, success, failure } from '../shared/axios'
-import { successAlert } from './alert-actions'
+import { errorAlert, successAlert } from './alert-actions'
 
 const getAll = (attribute) => {
     attribute = attribute || {}
@@ -30,6 +30,7 @@ const getAll = (attribute) => {
                 },
                 error => {
                     dispatch(failure(inventoryConstant.FETCH_ALL_ERROR, error))
+                    if (error?.data?.message) dispatch(errorAlert(error.data.message))
                     return error
                 }
             )

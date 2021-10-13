@@ -1,5 +1,6 @@
 import { categoryConstants } from '../Constants'
 import { api, processing, success, failure } from '../shared/axios'
+import { errorAlert } from './alert-actions'
 
 const getAll = (attribute) => {
     attribute = attribute || {}
@@ -27,8 +28,8 @@ const getAll = (attribute) => {
                     return response
                 },
                 error => {
-                    console.log("error", error);
                     dispatch(failure(categoryConstants.FETCH_ALL_ERROR, error))
+                    if (error?.data?.message) dispatch(errorAlert(error.data.message))
                     return error
                 }
             )

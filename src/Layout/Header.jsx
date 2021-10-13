@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import { useHistory } from "react-router";
 import { NavLink } from 'react-router-dom';
+import { toggleSidebar } from '../actions/site-actions';
 import { handleLogout } from '../helpers/GeneralHelpers';
 
 const links = [
@@ -28,6 +31,12 @@ const Header = (props) => {
         title = pathname.split('/');
     }
 
+    const { sidebar } = useSelector(state => ({
+        sidebar: state.site.collapsed
+    }), shallowEqual)
+
+    const dispatch = useDispatch()
+
     const [display, setDisplay] = useState('none')
 
 
@@ -54,14 +63,18 @@ const Header = (props) => {
         }, [ref]);
     }
 
+    const handleToggleSidebar = () => {
+        dispatch(toggleSidebar(!sidebar))
+    }
+
     const wrapperRef = useRef(null);
     useOutsideAlerter(wrapperRef);
 
     return (
-        <header id="header" className={" d-flex align-items-center justify-content-between px-4 bg-primary"}>
+        <header id="header" className={`d-flex align-items-center justify-content-between px-4 bg-primary ${sidebar ? 'toggled' : ''}`}>
             <ul className="navbar-nav flex-row">
                 <li className="nav-item">
-                    <a className="nav-link" data-widget="pushmenu" id="toggleSidebar" href role="button" >
+                    <a className="nav-link" data-widget="pushmenu" id="toggleSidebar" onClick={handleToggleSidebar} href role="button" >
                         <i className="fas fa-bars"></i>
                     </a>
                 </li>

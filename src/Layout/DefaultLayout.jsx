@@ -36,7 +36,7 @@ const DefaultLayout = ({ component: Component, children, title, ...rest }) => {
                         open={showSnackbar}
                     />
                 )}
-                {Component && <Component {...rest} />}
+                {Component && <Component toggled={true} {...rest} />}
                 {children}
             </>
         </>

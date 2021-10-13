@@ -102,8 +102,9 @@ const NewSales = (props) => {
         delete data.product_id
         dispatch(sellItem(id, data)).then(
             res => {
-                setState({ ...state, postLoading: false })
-                console.log("Res", res);
+                let data = { ...state.data }
+                data['product_id'] = ''
+                setState({ ...state, postLoading: false, data })
                 if (res?.status === 422) {
                     setState({ ...state, error: res?.data?.message })
                 }

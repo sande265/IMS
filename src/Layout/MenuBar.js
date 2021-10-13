@@ -61,7 +61,7 @@ class MenuBar extends Component {
     showHideMenu(id) {
         const sideTreeList = this.state.sideTreeList.map((elm) => {
             if (elm.items) {
-                const temp = elm.items.find(subElm => subElm.id == id || subElm.children.includes(id) || id.includes(subElm.link));
+                const temp = elm.items.find(subElm => subElm.id === id || subElm.children.includes(id) || id.includes(subElm.link));
                 if (temp) {
                     // this.setSelectedSubItem(temp)
                     this.props.onItemSelect(elm)
@@ -69,7 +69,7 @@ class MenuBar extends Component {
                     return { ...elm, active: true };
                 }
             }
-            if (elm.id == id || elm.link == id) {
+            if (elm.id === id || elm.link === id) {
                 this.props.onItemSelect(elm)
 
                 this.setState({ selectedItem: elm, selectedSubItem: elm.items ? elm.items[0] : null })

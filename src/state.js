@@ -1,10 +1,11 @@
 import { combineReducers } from "redux";
 import {
     alertReducer, inventoryReducers, authReducer, customerReducers, vendorReducers, dashboardReducers,
-    categoryReducer
+    categoryReducer, siteReducer
 } from "./Reducers";
 
 const reducers = combineReducers({
+    site: siteReducer,
     alerts: alertReducer,
     currentUser: authReducer,
     inventory: inventoryReducers,
