@@ -34,7 +34,7 @@ const Dashboard = (props) => {
     return <ContentWrapper>
         <div className="row">
             <div className="col-xs-12 col-sm-6 col-md-4">
-                <div className="card card-success">
+                <div className="card " style={{ borderRadius: '0 50px 0 0' }}>
                     <div className="card-header with-border">Total Sale Today</div>
                     <div className="card-body align-items-center">
                         <span style={{ fontSize: 30 }}>Rs: </span>
@@ -43,7 +43,7 @@ const Dashboard = (props) => {
                 </div>
             </div>
             <div className="col-xs-12 col-sm-6 col-md-3">
-                <div className="card card-success">
+                <div className="card " style={{ borderRadius: '0 50px 0 0' }}>
                     <div className="card-header with-border">Total Quantity Sold</div>
                     <div className="card-body">
                         <div className="text-center" style={{ fontSize: "30px", fontWeight: 900 }}>{total_qty ? total_qty : 0}</div>
@@ -51,7 +51,7 @@ const Dashboard = (props) => {
                 </div>
             </div>
             <div className="col-xs-12 col-sm-6 col-md-5">
-                <div className="card card-success">
+                <div className="card " style={{ borderRadius: '0 50px 0 0' }}>
                     <div className="card-header with-border">Sold Items</div>
                     <div className="card-body">
                         <div className="table-wrapper">
