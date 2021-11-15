@@ -5,6 +5,7 @@ import { customerConstants } from "./customer-constants";
 import { vendorConstants } from "./vendor-constants";
 import { dashboardConstants } from "./dashboard-constants";
 import { categoryConstants } from "./category-constants";
+import { debtorConstants } from "./debtors-constants";
 
 export {
     userConstants,
@@ -13,5 +14,6 @@ export {
     customerConstants,
     vendorConstants,
     dashboardConstants,
-    categoryConstants
+    categoryConstants,
+    debtorConstants
 }

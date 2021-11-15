@@ -6,18 +6,30 @@ import { Table } from "../../shared/tableComponents";
 
 const Dashboard = (props) => {
 
+    const d = props.location?.search?.split("date")[1]?.replace("=", "")
+
     const { sales } = useSelector(state => ({
         sales: state.dashboard.sales
     }))
     const dispatch = useDispatch();
-    const date = new Date().toISOString().split("T")[0]
+    const date = d ? d : new Date().toISOString().split("T")[0]
     // const date = "2021-06-06"
+
+    console.log("d", d);
+    console.log("props", props);
 
     const [state, setState] = useState({
         data: {},
         total_amount: '',
         total_qty: '',
     })
+
+    useEffect(() => {
+        props.history.push({
+            pathname: props.location.pathname,
+            search: props.location.search
+        })
+    }, [])
 
     useEffect(() => {
         dispatch(getDailySales(date))
@@ -34,7 +46,7 @@ const Dashboard = (props) => {
     return <ContentWrapper>
         <div className="row">
             <div className="col-xs-12 col-sm-6 col-md-4">
-                <div className="card " style={{ borderRadius: '0 50px 0 0' }}>
+                <div className="card " style={{ borderRadius: '8px 50px 8px 8px' }}>
                     <div className="card-header with-border">Total Sale Today</div>
                     <div className="card-body align-items-center">
                         <span style={{ fontSize: 30 }}>Rs: </span>
@@ -43,7 +55,7 @@ const Dashboard = (props) => {
                 </div>
             </div>
             <div className="col-xs-12 col-sm-6 col-md-3">
-                <div className="card " style={{ borderRadius: '0 50px 0 0' }}>
+                <div className="card " style={{ borderRadius: '8px 50px 8px 8px' }}>
                     <div className="card-header with-border">Total Quantity Sold</div>
                     <div className="card-body">
                         <div className="text-center" style={{ fontSize: "30px", fontWeight: 900 }}>{total_qty ? total_qty : 0}</div>
@@ -51,7 +63,7 @@ const Dashboard = (props) => {
                 </div>
             </div>
             <div className="col-xs-12 col-sm-6 col-md-5">
-                <div className="card " style={{ borderRadius: '0 50px 0 0' }}>
+                <div className="card " style={{ borderRadius: '8px 50px 8px 8px' }}>
                     <div className="card-header with-border">Sold Items</div>
                     <div className="card-body">
                         <div className="table-wrapper">

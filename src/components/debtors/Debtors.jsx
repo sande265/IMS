@@ -1,37 +1,27 @@
-import { deleteInventory, getInventories } from "../../actions/inventory-actions";
-import ContentWrapper from "../../Layout/Main"
+import { Pagination, Status, Table, TableCrudBox, TableHeader } from "../../shared/tableComponents";
+import ContentWrapper from "../../Layout/Main";
 import { useEffect, useState } from "react";
-import { shallowEqual, useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { Pagination, Status, TableCrudBox, TableHeader, Table } from "../../shared/tableComponents";
+import { generateQueryParams, getUrlParameter } from "../../helpers/GeneralHelpers";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { deleteDebtor, getAllDebtors } from "../../actions/debtor-actions";
 import { SpinnerLoader } from "../../shared/loader/Loader";
-import { getUrlParameter, getDate, generateQueryParams } from "../../helpers/GeneralHelpers";
-import DeleteModel from "../../shared/modals/DeleteModal";
-import ContentModal from "../../shared/modals/ContentModal";
-import ProductInfo from "./QR/productInfoInQR";
 
 const links = [
     {
-        name: 'Inventory',
-        path: '/inventory'
+        name: 'Debtors',
+        path: '/debtors'
     }
 ]
 
-const columns = [
-    "id", "name", "color", "actual_price",
-    { name: 'Quantity', alignment: 'right' },
-    { name: "status", alignment: 'center' },
-    { name: "is sold", alignment: 'center' },
-    { name: 'purchased date', alignment: 'right' },
-    { name: 'actions', alignment: 'center' }
-]
+const Debtors = (props) => {
 
-const Inventory = (props) => {
     let pathname = props.location.pathname
     let search_params = props.location.search
 
-    const { inventories } = useSelector(state => ({
-        inventories: state.inventory.inventories,
+    let columns = ['#', 'Debtor Name', 'Remaining Amount', 'Pending Intrest', 'rate', { name: 'actions', alignment: 'center', width: 150 }]
+
+    const { debtors } = useSelector(state => ({
+        debtors: state.debtors.debtors,
     }), shallowEqual);
     const dispatch = useDispatch()
 
@@ -63,7 +53,7 @@ const Inventory = (props) => {
     }
 
     const deleteItem = () => {
-        dispatch(deleteInventory(modal.itemToDelete)).then(res => fetchData());
+        dispatch(deleteDebtor(modal.itemToDelete)).then(res => fetchData());
         setModal({ ...modal, showModal: !modal.showModal });
     }
 
@@ -92,9 +82,9 @@ const Inventory = (props) => {
     }, [extra])
 
     useEffect(() => {
-        if (inventories)
-            setState({ ...state, data: inventories })
-    }, [inventories])
+        if (debtors)
+            setState({ ...state, data: debtors })
+    }, [debtors])
 
     const setUrlQuery = () => {
         let filter = [...extra.filter]
@@ -128,42 +118,28 @@ const Inventory = (props) => {
 
     const fetchData = () => {
         let { limit, page, q, sort_by, sort_field, filterKey, filterValue, filter } = extra;
-        dispatch(getInventories({ limit, page, q, sort_by, sort_field, filterKey, filterValue, filter }))
+        dispatch(getAllDebtors({ limit, page, q, sort_by, sort_field, filterKey, filterValue, filter }))
             .then(res => setLoading(false))
         setUrlQuery()
     }
 
-    const handleQrModalToggle = (e, id) => {
-        state.QRModal
-            ? setModal({ ...modal, QRModal: !modal.QRModal })
-            : setModal({ ...modal, QRModal: !modal.QRModal, itemID: id });
-    }
-
     let { data, current_page, from, last_page, per_page, to, total } = state.data;
 
-    let inventoriesList = loading ? <tr className="text-center">
+    let tableBody = loading ? <tr className="text-center">
         <td colSpan="10"><SpinnerLoader /></td>
     </tr> : data && data.length > 0 ? data.map((items, idx) => {
-        let { id, actual_price, color, price, product_name, status, purchased_date, is_sold, qty } = items;
+        let { id, name, remaning_amount, status, pending_intrest, rate } = items;
         return <tr key={idx}>
             <td>{id}</td>
-            <td role="button" onClick={() => props.history.push(`/inventory/${id}/edit`)}>{product_name ? product_name : '-'}</td>
-            <td>{color ? color : '-'}</td>
-            <td>{actual_price ? actual_price : '-'}</td>
-            <td className="text-right">{qty ? qty : 0}</td>
+            <td role="button" onClick={() => props.history.push(`/debtors/${id}/edit`)}>{name ? name : '-'}</td>
+            <td>{remaning_amount ? 'Rs.' + remaning_amount : '-'}</td>
             <td className="text-center">
                 <Status status={status} />
             </td>
+            <td className="text-right">{pending_intrest ? 'Rs. ' + pending_intrest : '-'}</td>
+
+            <td className="text-right">{rate ? rate + '%' : 0}</td>
             <td className="text-center">
-                <Status status={is_sold} activeLabel="Yes" inActiveLabel="No" />
-            </td>
-            <td className="text-right">{purchased_date ? getDate(purchased_date) : '-'}</td>
-            <td className="text-center">
-                <div className="btn-group" onClick={e => handleQrModalToggle(e, id)}>
-                    <a href title="Product QR" className="table-edit" role="button">
-                        <i className="ri-qr-code-line"></i>
-                    </a>
-                </div>
                 <TableCrudBox type="inventory" noView id={id} handleToggleModal={e => handleToggleModal(id)} />
             </td>
         </tr>
@@ -172,7 +148,7 @@ const Inventory = (props) => {
     </tr>
 
     const onCreate = () => {
-        props.history.push('/inventory/new')
+        props.history.push('/debtors/new')
     }
 
     const changePage = (page) => {
@@ -191,22 +167,7 @@ const Inventory = (props) => {
             setExtra({ ...extra, q: query })
     }
 
-    return <ContentWrapper title="Inventory" links={links} options={['create']} onCreate={onCreate}>
-        {modal.showModal && (
-            <DeleteModel
-                title='Delete Product'
-                handleToggleModel={() => handleToggleModal()}
-                deleteItem={() => deleteItem()}
-            />
-        )}
-        {modal.QRModal && (
-            <ContentModal
-                title={`QR Code of Product With ID ${modal.itemID}`}
-                modalBody={<ProductInfo value={modal.itemID} />}
-                handleToggleModal={handleQrModalToggle}
-                actions={false}
-            />
-        )}
+    return <ContentWrapper title="Debtors" links={links} options={['create']} onCreate={onCreate}>
         <div className="card">
             <div className="card-header">
                 <TableHeader
@@ -218,7 +179,7 @@ const Inventory = (props) => {
             <div className="card-body">
                 <div className="table-wrapper">
                     <Table tableClass="table-hover" columns={columns}>
-                        {inventoriesList}
+                        {tableBody}
                     </Table>
                 </div>
                 <Pagination
@@ -233,4 +194,4 @@ const Inventory = (props) => {
     </ContentWrapper>
 }
 
-export default Inventory;
+export default Debtors;

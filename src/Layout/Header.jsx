@@ -39,7 +39,6 @@ const Header = (props) => {
 
     const [display, setDisplay] = useState('none')
 
-
     const LinkItem = React.memo((props) => {
         const { link } = props
         return <li className="nav-item d-none d-sm-inline-block">
@@ -48,6 +47,7 @@ const Header = (props) => {
             </NavLink>
         </li>
     })
+
 
     const useOutsideAlerter = (ref) => {
         useEffect(() => {
@@ -64,7 +64,7 @@ const Header = (props) => {
     }
 
     const handleToggleSidebar = () => {
-        dispatch(toggleSidebar(!sidebar))
+        dispatch(toggleSidebar(!sidebar));
     }
 
     const wrapperRef = useRef(null);

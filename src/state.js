@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import {
     alertReducer, inventoryReducers, authReducer, customerReducers, vendorReducers, dashboardReducers,
-    categoryReducer, siteReducer
+    categoryReducer, siteReducer, debtorReducers
 } from "./Reducers";
 
 const reducers = combineReducers({
@@ -12,7 +12,8 @@ const reducers = combineReducers({
     customers: customerReducers,
     vendors: vendorReducers,
     dashboard: dashboardReducers,
-    categories: categoryReducer
+    categories: categoryReducer,
+    debtors: debtorReducers,
 })
 
 const rootReducer = (state, action) => {

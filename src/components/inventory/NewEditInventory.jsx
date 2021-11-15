@@ -6,6 +6,7 @@ import { getInventory, editInventory, createInventory } from "../../actions/inve
 import { localValidation } from "../../helpers/ValidationHelper";
 import { successAlert } from "../../actions/alert-actions";
 import { getDate } from "../../helpers/GeneralHelpers";
+import ProductInfo from "./QR/productInfoInQR";
 
 const initState = {
     loading: false,
@@ -119,14 +120,12 @@ const NewEditInventory = (props) => {
                             formData.append(item, data[item])
                         }
                     })
-                    if (!data.category) formData.append('category[0]', 'ehllo')
-                    if (!data.type) formData.append("type[0]", "je")
                     formData.append("_method", "patch")
                 }
                 dispatch(data.image ? createInventory(formData) : editInventory(id, data)).then(
                     res => {
                         if (res.status === 422) {
-                            setState({ ...state, error: res.data })
+                            setState({ ...state, error: res.data.message })
                         } else if (res.status === 200) {
                             dispatch(successAlert(res.data.message))
                         }
@@ -139,12 +138,10 @@ const NewEditInventory = (props) => {
                         formData.append(item, data[item])
                     }
                 })
-                if (!data.category) formData.append('category[0]', 'ehllo')
-                if (!data.type) formData.append("type[0]", "je")
                 dispatch(createInventory(formData)).then(
                     res => {
                         if (res.status === 422) {
-                            setState({ ...state, error: res.data })
+                            setState({ ...state, error: res.data.message })
                         } else if (res.status === 200) {
                             dispatch(successAlert(res.data.message))
                             props.history.push('/inventories')
@@ -275,6 +272,14 @@ const NewEditInventory = (props) => {
                         </div>
                     </div>
                 </div>
+                {id && <div className="card">
+                    <div className="card-header with-border">
+                        Product QR
+                    </div>
+                    <div className="card-body">
+                        <ProductInfo value={id} />
+                    </div>
+                </div>}
             </div>
             <div className="col-xs-12 col-sm-6">
                 <div className="card">

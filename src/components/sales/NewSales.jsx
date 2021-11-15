@@ -115,6 +115,8 @@ const NewSales = (props) => {
 
     let { inventoryList, loading, data, error, postLoading } = state;
 
+    console.log("inventory", inventoryList);
+
     return <ContentWrapper title="New Sale" links={links} options={['back']} onBack={() => props.history.goBack()}>
         {modal.showModal && (
             <SimpleModal
@@ -131,7 +133,7 @@ const NewSales = (props) => {
                     <div className="form-group">
                         <label>Search Product</label>
                         <SelectSearch
-                            options={inventoryList ? inventoryList : []}
+                            options={inventoryList?.length > 0 ? inventoryList : [{ name: 'No Products To Sell' }]}
                             value={data.product_id}
                             onChange={e => onSelectSearchChange(e, 'product_id')}
                             placeholder='Search Products'

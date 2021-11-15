@@ -6,7 +6,7 @@ import Login from "../Pages/auth/Login"
 import { Route, Switch, useHistory } from "react-router"
 import {
     Inventory, NewEditInventory, Customers, NewEditCustomers, Vendors, NewEditVendors, Dashboard, SalesReport,
-    Categories, NewEditCategory, NewSales, Profile
+    Categories, NewEditCategory, NewSales, Profile, Debtors, NewEditDebtors
 } from "../components"
 import DefaultLayout from "../Layout/DefaultLayout"
 import NotFound from '../Pages/views/NotFound';
@@ -24,7 +24,8 @@ const Routes = (props) => {
 
         <Route path={[
             "/dashboard", "/profile", "/inventories", "/inventory/new", "/inventory/:id", "/customers", '/customer/new', '/customers/:id',
-            "/vendors", "/vendors/:id/edit", "/sales-report", '/categories', '/category/new', '/category/:id/edit', "/new-sale"
+            "/vendors", "/vendors/:id/edit", "/sales-report", '/categories', '/category/new', '/category/:id/edit', "/new-sale", "/debtors",
+            "/debtors/:id/edit", "/debtors/new", "/debtors/history", "/debtors/payment"
         ]}>
             <DefaultLayout>
                 <PrivateRoute type="private" component={() => {
@@ -44,6 +45,9 @@ const Routes = (props) => {
                         <Route exact path="/categories" component={Categories} />
                         <Route exact path="/category/new" component={NewEditCategory} />
                         <Route exact path="/category/:id/edit" component={NewEditCategory} />
+                        <Route exact path="/debtors" component={Debtors} />
+                        <Route exact path="/debtors/new" component={NewEditDebtors} />
+                        <Route exact path="/debtors/:id/edit" component={NewEditDebtors} />
                     </>
                 }} />
             </DefaultLayout>

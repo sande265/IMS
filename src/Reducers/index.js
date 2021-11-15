@@ -6,6 +6,7 @@ import { customerReducers } from "./customer-reducers";
 import { vendorReducers } from "./vendor-reducers";
 import { dashboardReducers } from "./dashboard-reducers";
 import { categoryReducer } from "./category-reducer";
+import { debtorReducers } from "./debtors-reducer";
 
 export {
     siteReducer,
@@ -15,5 +16,6 @@ export {
     customerReducers,
     vendorReducers,
     dashboardReducers,
-    categoryReducer
+    categoryReducer,
+    debtorReducers
 }

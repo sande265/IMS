@@ -204,7 +204,7 @@ const SalesReport = (props) => {
             <td className="text-right">{sale_price ? sale_price : '-'}</td>
             <td className="text-right">{sale_price && qty ? (sale_price * qty) : 0}</td>
             <td className="text-right">{sold_date ? getLongDate(sold_date) : '-'}</td>
-            <td className="text-right">{actual_price && qty ? (sale_price * qty) - (actual_price * qty) : 0}</td>
+            <td className="text-right">{sale_price && qty ? ((sale_price * 0.35) * qty).toFixed(2) : 0}</td>
             <td className="text-center">
                 <TableCrudBox type="inventory" noEdit noDelete id={id} />
             </td>
@@ -213,10 +213,12 @@ const SalesReport = (props) => {
         <td colSpan="10">No Records</td>
     </tr>
 
-    let total = 0
+    let total_profit = 0
+    let total_sales = 0
     for (var i = 0; i < data?.length; i++) {
-        if (data[i] && data[i].sale_price && data[i].qty && data[i].actual_price)
-            total += (data[i].sale_price * data[i].qty) - (data[i].actual_price * data[i].qty)
+        if (data[i] && data[i].sale_price)
+            total_profit += ((data[i].sale_price * 0.35) * data[i].qty)
+        total_sales += data[i].sale_price * data[i].qty
     }
 
     return <ContentWrapper>
@@ -243,9 +245,9 @@ const SalesReport = (props) => {
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td className="text-right">Total: Rs. {total_sales.toFixed(2)}</td>
                             <td></td>
-                            <td></td>
-                            <td className="text-right">Total: Rs. {total}</td>
+                            <td className="text-right">Total: Rs. {total_profit.toFixed(2)}</td>
                             <td></td>
                         </tr>
                     </Table>

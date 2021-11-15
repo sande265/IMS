@@ -11,6 +11,8 @@ import Categories from './category/Categories';
 import NewEditCategory from './category/NewEditCategory';
 import NewSales from './sales/NewSales';
 import Profile from './Users/Profile';
+import Debtors from './debtors/Debtors';
+import NewEditDebtors from './debtors/NewEditDebtors';
 
 export {
     Home,
@@ -26,4 +28,6 @@ export {
     NewEditCategory,
     NewSales,
     Profile,
+    Debtors,
+    NewEditDebtors
 }

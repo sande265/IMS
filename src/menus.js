@@ -62,4 +62,14 @@ export const menu = [
         active: true,
         status: true,
     },
+    {
+        id: 'debtors',
+        label: "Debtors",
+        name: 'debtor',
+        icon: "ri-briefcase-line",
+        link: '/debtors',
+        children: [],
+        active: true,
+        status: true,
+    },
 ];
