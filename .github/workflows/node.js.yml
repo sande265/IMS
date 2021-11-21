@@ -28,7 +28,6 @@ jobs:
         cache: 'npm'
     - run: npm i
     - run: npm run build
-    - name: Collect artifacts
     - name: Push artifacts
       run: |
         git checkout -b deployment${{github.run_number}}
