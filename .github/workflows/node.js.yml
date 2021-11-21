@@ -35,6 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     # We specify that deploys needs to
     # finish before we create a release
+    needs: build
     steps:
       # Download previously shared build
       - name: Get artifact
