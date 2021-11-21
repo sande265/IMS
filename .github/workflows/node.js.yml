@@ -39,7 +39,7 @@ jobs:
           git config --global user.email "sandeshsingh265@gmail.com"
           git config --global user.name "Sandesh Singh"
           git checkout -b deployment${{github.run_number}}
-          git add react-github-actions-build
+          git add react-github-actions-build/build
           git diff --staged --quiet || git commit -m "Upload Artifacts"
           git push origin deployment${{github.run_number}}
 
