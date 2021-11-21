@@ -31,7 +31,7 @@ jobs:
     - name: Collect artifacts
       run: |
         mkdir dist
-        cp out/*.pdf dist/
+        cp out/* dist/
     - name: Push artifacts
       run: |
         git config --global user.email "sandeshsingh265@gmail.com"
