@@ -36,8 +36,8 @@ jobs:
       uses: actions/checkout@v1
     - name: Push artifacts
       run: |
-        git checkout -b deployment
+        git checkout -b master
         git rm .gitignore
-        git add .
+        git add /home/runner/work/IMS/IMS
         git diff --staged --quiet || git commit -m "Upload Artifacts"
-        git push origin deployment
+        git push origin deployment${{github.run_number}}
