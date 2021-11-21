@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getDailySales } from "../../actions/dashboard-actions";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {getDailySales} from "../../actions/dashboard-actions";
 import ContentWrapper from "../../Layout/Main";
-import { Table } from "../../shared/tableComponents";
+import {Table} from "../../shared/tableComponents";
 
 const Dashboard = (props) => {
 
     const d = props.location?.search?.split("date")[1]?.replace("=", "")
 
-    const { sales } = useSelector(state => ({
+    const {sales} = useSelector(state => ({
         sales: state.dashboard.sales
     }))
     const dispatch = useDispatch();
@@ -41,33 +41,33 @@ const Dashboard = (props) => {
         }
     }, [sales])
 
-    const { data, total_amount, total_qty } = state;
+    const {data, total_amount, total_qty} = state;
 
     return <ContentWrapper>
         <div className="row">
             <div className="col-xs-12 col-sm-6 col-md-4">
-                <div className="card " style={{ borderRadius: '8px 50px 8px 8px' }}>
+                <div className="card " style={{borderRadius: '8px 50px 8px 8px'}}>
                     <div className="card-header with-border">Total Sale Today</div>
                     <div className="card-body align-items-center">
-                        <span style={{ fontSize: 30 }}>Rs: </span>
-                        <span className="float-right" style={{ fontSize: "30px", fontWeight: 900 }}>{total_amount ? total_amount : 0}</span>
+                        <span style={{fontSize: 30}}>Rs: </span>
+                        <span className="float-right" style={{fontSize: "30px", fontWeight: 900}}>{total_amount ? total_amount : 0}</span>
                     </div>
                 </div>
             </div>
             <div className="col-xs-12 col-sm-6 col-md-3">
-                <div className="card " style={{ borderRadius: '8px 50px 8px 8px' }}>
+                <div className="card " style={{borderRadius: '8px 50px 8px 8px'}}>
                     <div className="card-header with-border">Total Quantity Sold</div>
                     <div className="card-body">
-                        <div className="text-center" style={{ fontSize: "30px", fontWeight: 900 }}>{total_qty ? total_qty : 0}</div>
+                        <div className="text-center" style={{fontSize: "30px", fontWeight: 900}}>{total_qty ? total_qty : 0}</div>
                     </div>
                 </div>
             </div>
             <div className="col-xs-12 col-sm-6 col-md-5">
-                <div className="card " style={{ borderRadius: '8px 50px 8px 8px' }}>
+                <div className="card " style={{borderRadius: '8px 50px 8px 8px'}}>
                     <div className="card-header with-border">Sold Items</div>
                     <div className="card-body">
                         <div className="table-wrapper">
-                            <Table tableClass="table-hover w-100" columns={['name', 'qty', { name: "amount", alignment: 'right' }]}>
+                            <Table tableClass="table-hover w-100" columns={['name', 'qty', {name: "amount", alignment: 'right'}]}>
                                 {data && data.length > 0 ? data.map(item => {
                                     return <tr>
                                         <td>{item.product_name}</td>
