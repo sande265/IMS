@@ -37,6 +37,6 @@ jobs:
     - name: Push artifacts
       run: |
         git checkout -b deployment
-        git add build
+        git add /home/runner/work/IMS/IMS/build
         git diff --staged --quiet || git commit -m "Upload Artifacts"
         git push origin deployment
