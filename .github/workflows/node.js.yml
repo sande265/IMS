@@ -5,7 +5,7 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
@@ -29,8 +29,8 @@ jobs:
         with:
           name: react-github-actions-build
           path: build
-        
-  release:
+
+  deploy:
     runs-on: ubuntu-latest
     # We specify that deploys needs to
     # finish before we create a release
@@ -61,4 +61,3 @@ jobs:
           git add .
           git diff --staged --quiet || git commit -m "Update Artifacts"
           git push origin deployment
-

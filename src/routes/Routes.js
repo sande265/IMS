@@ -1,9 +1,9 @@
-import { isAuthenticated } from "../helpers/GeneralHelpers"
+import {isAuthenticated} from "../helpers/GeneralHelpers"
 import BasicLayout from "../Layout/BasicLayout"
 import PrivateRoute from "../Layout/PrivateRoute"
 import PublicRoute from "../Layout/PublicRoute"
 import Login from "../Pages/auth/Login"
-import { Route, Switch, useHistory } from "react-router"
+import {Route, Switch, useHistory} from "react-router"
 import {
     Inventory, NewEditInventory, Customers, NewEditCustomers, Vendors, NewEditVendors, Dashboard, SalesReport,
     Categories, NewEditCategory, NewSales, Profile, Debtors, NewEditDebtors
@@ -22,11 +22,7 @@ const Routes = (props) => {
             </BasicLayout>
         </Route>
 
-        <Route path={[
-            "/dashboard", "/profile", "/inventories", "/inventory/new", "/inventory/:id", "/customers", '/customer/new', '/customers/:id',
-            "/vendors", "/vendors/:id/edit", "/sales-report", '/categories', '/category/new', '/category/:id/edit', "/new-sale", "/debtors",
-            "/debtors/:id/edit", "/debtors/new", "/debtors/history", "/debtors/payment"
-        ]}>
+        <Route path={['*/']}>
             <DefaultLayout>
                 <PrivateRoute type="private" component={() => {
                     return <>
@@ -54,7 +50,7 @@ const Routes = (props) => {
         </Route>
 
         <Route component={NotFound} />
-        {isAuthenticated() ? history.push({ pathname: history.location.pathname }) : history.push("/login")}
+        {isAuthenticated() ? history.push({pathname: history.location.pathname}) : history.push("/login")}
     </Switch>
 }
 
