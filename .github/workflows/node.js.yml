@@ -30,7 +30,6 @@ jobs:
     - run: npm run build
     - name: Setup Git Client
       run: |
-        ssh-keyscan -H github.com >> ~/.ssh/known_hosts
         git config --global user.email "sandeshsingh265@gmail.com"
         git config --global user.name "Sandesh Singh"
     - name: Set up Git repository
