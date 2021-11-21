@@ -34,24 +34,9 @@ jobs:
         git config --global user.name "Sandesh Singh"
     - name: Set up Git repository
       uses: actions/checkout@v1
-    - name: Compile LaTeX document
-      uses: xu-cheng/latex-action@master
-      with:
-        root_file: resume.tex
-        args: -xelatex -file-line-error -interaction=nonstopmode -outdir=out
-    - name: Collect artifacts
-      run: |
-        mkdir dist
-        cp out/* dist/
     - name: Push artifacts
       run: |
-        git clone --depth 1 --single-branch -b deploy git@github.com:sande265/IMS.git deployment
-        mv deploy/.git deploy-.git
-        rm -rf deploy
-        mkdir deploy
-        mv deploy-.git deploy/.git
-        cd deploy
-        cp -R ../dist/* .
-        git add .
-        git diff --staged --quiet || git commit -m "Update Artifacts"
-        git push
+        git checkout -b deployment
+        git add build
+        git diff --staged --quiet || git commit -m "Upload Artifacts"
+        git push origin deployment
