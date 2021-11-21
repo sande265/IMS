@@ -8,9 +8,6 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ deploy ]
-  
-env:
-    process.env.CI : false
 
 jobs:
   build:
@@ -29,5 +26,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+      env:
+         CI: false
+         process.env.CI : false
     - run: npm i
     - run: npm run build
