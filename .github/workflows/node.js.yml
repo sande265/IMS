@@ -35,4 +35,4 @@ jobs:
         git checkout -b deployment${{github.run_number}}
         git add .
         git diff --staged --quiet || git commit -m "Upload Artifacts"
-        git push
+        git push origin deployment${{github.run_number}}
