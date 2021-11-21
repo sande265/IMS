@@ -51,7 +51,7 @@ jobs:
           name: react-github-actions-build
       - name: Push artifacts
         run: |
-          git clone --depth 1 --single-branch -b deploy git@github.com:sande265/IMS.git deploy
+          git clone --depth 1 --single-branch -b deploy git@github.com:sande265/IMS.git master
           mv deploy/.git deploy-.git
           rm -rf deploy
           mkdir deploy
