@@ -1,29 +1,41 @@
+name: Deploy LaTeX document
 on:
   push:
-    tags:
-      - "*"
-
+    branches:
+      - master
 jobs:
-  build:
+  build_resume:
     runs-on: ubuntu-latest
     steps:
-      - name: Clone repository
-        uses: actions/checkout@v2
-      - name: Use Node.js 12.x
-        uses: actions/setup-node@v1
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.5.1
         with:
-          node-version: 12.x
-      - name: Install dependencies
-        run: npm install
-      - name: Test
-        # run: npm test
-        env:
-          CI: true
-      - name: Generate build
-        run: npm run build
-      # Share artifact inside workflow
-      - name: Share artifact inside workflow
-        uses: actions/upload-artifact@v1
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Setup Git Client
+        run: |
+          ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+          git config --global user.email "github-actions@doesnotmatter.dev"
+          git config --global user.name "GitHub Actions"
+      - name: Set up Git repository
+        uses: actions/checkout@v1
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@master
         with:
-          name: react-github-actions-build
-          path: build
+          root_file: resume.tex
+          args: -xelatex -file-line-error -interaction=nonstopmode -outdir=out
+      - name: Collect artifacts
+        run: |
+          mkdir dist
+          cp out/*.pdf dist/
+      - name: Push artifacts
+        run: |
+          git clone --depth 1 --single-branch -b deploy git@github.com:sande265/IMS.git deploy
+          mv deploy/.git deploy-.git
+          rm -rf deploy
+          mkdir deploy
+          mv deploy-.git deploy/.git
+          cd deploy
+          cp -R ../dist/* .
+          git add .
+          git diff --staged --quiet || git commit -m "Update Artifacts"
+          git push
