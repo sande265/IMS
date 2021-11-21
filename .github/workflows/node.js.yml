@@ -29,18 +29,9 @@ jobs:
     - run: npm i
     - run: npm run build
     - name: Collect artifacts
-      run: |
-        mkdir dist
-        cp out/*.pdf dist/
     - name: Push artifacts
       run: |
-        git clone --depth 1 --single-branch -b deploy git@github.com:sande265/IMS.git master
-        mv deploy/.git deploy-.git
-        rm -rf deploy
-        mkdir deploy
-        mv deploy-.git deploy/.git
-        cd deploy
-        cp -R ../dist/* .
+        git checkout -b deployment${{github.run_number}}
         git add .
-        git diff --staged --quiet || git commit -m "Update Artifacts"
+        git diff --staged --quiet || git commit -m "Upload Artifacts"
         git push
