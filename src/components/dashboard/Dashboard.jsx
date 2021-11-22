@@ -41,7 +41,7 @@ const Dashboard = (props) => {
         }
     }, [sales])
 
-    const {data, total_amount, total_qty} = state;
+    const {data, total_amount, total_qty, monthly_total} = state;
 
     return <ContentWrapper>
         <div className="row">
@@ -79,6 +79,15 @@ const Dashboard = (props) => {
                                 </tr>}
                             </Table>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div className="col-xs-12 col-sm-6 col-md-4">
+                <div className="card " style={{borderRadius: '8px 50px 8px 8px'}}>
+                    <div className="card-header with-border">Monthly Sales</div>
+                    <div className="card-body align-items-center">
+                        <span style={{fontSize: 30}}>Rs: </span>
+                        <span className="float-right" style={{fontSize: "30px", fontWeight: 900}}>{monthly_total ? monthly_total : 0}</span>
                     </div>
                 </div>
             </div>
