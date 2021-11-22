@@ -42,7 +42,7 @@ const Dashboard = (props) => {
         } else if (sales_err?.status === 400) {
           setState(sales_err.data)
      }
-    }, [sales])
+    }, [sales, sales_err])
 
     const {data, total_amount, total_qty, monthly_total} = state;
 
