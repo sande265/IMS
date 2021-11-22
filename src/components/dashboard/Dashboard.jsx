@@ -8,8 +8,9 @@ const Dashboard = (props) => {
 
     const d = props.location?.search?.split("date")[1]?.replace("=", "")
 
-    const {sales} = useSelector(state => ({
-        sales: state.dashboard.sales
+    const {sales, sales_err} = useSelector(state => ({
+        sales: state.dashboard.sales,
+        sales_err: state.dashboard.error
     }))
     const dispatch = useDispatch();
     const date = d ? d : new Date().toISOString().split("T")[0]
@@ -38,7 +39,9 @@ const Dashboard = (props) => {
     useEffect(() => {
         if (sales) {
             setState(sales)
-        }
+        } else if (sales_err?.status === 400) {
+          setState(sales_err.data)
+     }
     }, [sales])
 
     const {data, total_amount, total_qty, monthly_total} = state;
